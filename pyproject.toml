@@ -1,27 +1,85 @@
 [build-system]
 requires = ["setuptools", "wheel", "Cython>=0.29.23", "numpy >= 1.20"]
-
-[project.urls]
-"Homepage"= "https://github.com/AlexanderFengler/ssm-simulators"
-"Bug Tracker"= "https://github.com/AlexanderFengler/ssm-simulators/issues"
+build-backend = "setuptools.build_meta"
 
 [project]
-name= "ssm-simulators"
-version= "0.9.0"
-
-authors= [{name = "Alexander Fenger", email = "alexander_fengler@brown.edu"}]
-description= "SSMS is a package collecting simulators and training data generators for a bunch of generative models of interest in the cognitive science / neuroscience and approximate bayesian computation communities"
-readme = "README.md"
-requires-python= ">=3.10, <=3.12"
-classifiers= [
-    "Development Status :: 1 - Planning",
-    "Environment :: Console",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python",
-    "Topic :: Scientific/Engineering"
+name = "ssm-simulators"
+version = "0.10.0"
+description = "SSMS is a package collecting simulators and training data generators for cognitive science, neuroscience, and approximate bayesian computation"
+authors = [
+    { name = "Alexander Fengler", email = "alexander_fengler@brown.edu" },
 ]
-dependencies=["numpy >= 1.17.0, <2.0.0", "scipy >=1.6.3", "pandas >= 1.0.0", "scikit-learn >= 0.24.0", "psutil >= 5.0.0", "pathos >= 0.3.0"]
-keywords= ["simulators", "generative models", "cognitive science", "neuroscience"]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "numpy >= 1.17.0, <2.0.0",
+    "cython >= 0.29.23",
+    "scipy >= 1.6.3",
+    "pandas >= 1.0.0",
+    "matplotlib",
+    "scikit-learn >= 0.24.0",
+    "psutil >= 5.0.0",
+    "pathos >= 0.3.0",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
 
-[project.optional-dependencies]
-dev = ["black", "ruff", "pytest"]
+[dependency-groups]
+dev = [
+    "pytest",
+    "mypy",
+    "black",
+    "ruff",
+    "pre-commit",
+    "pytest-cov>=6.0.0",
+    "pytest-xdist>=3.6.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/lnccbrown/ssm-simulators"
+"Bug Tracker" = "https://github.com/lnccbrown/ssm-simulators/issues"
+
+[tool.setuptools]
+packages = ["ssms"]
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 88
+target-python-version = "py310"
+select = [
+    "E",
+    "F",
+    "W",
+    "I",
+    "N",
+    "UP",
+    "ASYNC",
+    "S",
+    "BLE",
+    "B",
+    "A",
+    "C4",
+    "DTZ",
+    "T10",
+    "ARG",
+    "PTH",
+    "TD",
+    "FIX",
+]
+ignore = ["TD002", "TD003"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
